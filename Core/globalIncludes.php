@@ -1,9 +1,9 @@
 <?php
-//config load
+//Завантаження файлу конфігурації
 require 'Core/Main/MainConfig.php';
 
-//developer tools include
+//Завантаження файлу інструментів розробника
 require 'Core/lib/dev.php';
 
-//autoLoad function include
+//Підключення файлу автозавантаження об'єктів
 require 'Core/lib/autoload.php';

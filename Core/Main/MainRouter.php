@@ -10,28 +10,28 @@ use Core\Main\MainView;
 *******************************************************************************/
 class MainRouter {
   /* Object variables */
-  public $lang; //Routs array
-  protected $url; //User called link
-  protected $get_querys; //GET querys
-  protected $routs; //Routs array
+  public $lang; //Мова користувача
+  protected $url; //Шлях сторінки
+  protected $get_querys; //GET-запити
+  protected $routs; //Массив зі шляхами до файлів сторінки
 
   /*
   * Object create function
   */
   function __construct($url) {
-    $this->url = trim($url, '/'); //Set user colled link
-    if (empty($this->url)) { //If call index page
-      $this->url = 'index'; //Index page route
+    $this->url = trim($url, '/'); //Визначення сторінки до якої звернувся користувач
+    if (empty($this->url)) { //Якщо користувач звернувся по імені сайту
+      $this->url = 'index'; //Встановлення сторінки по-замовчуванню
     }
-    $this->run(); //Start finction call
+    $this->run(); //Запуск пошуку шляхів
   }
 
   /*
-  * Start function
+  * Запуск пошуку шляхів
   */
   public function run() {
-    $this->get_querys = $this->check_get_query(); //Call check GET querys function
-    $this->lang = $this->check_user_language(); //Take user language
+    $this->get_querys = $this->check_get_query(); //Запит пошуку GET-запитів
+    $this->lang = $this->check_user_language(); //Визначення мови користувача
     if ($this->routs = $this->check_routes()) {
       $controller = $this->routs['controller'];
       $controller = new $controller($this->routs,$this->lang,$this->get_querys);
@@ -46,26 +46,26 @@ class MainRouter {
 
   /*************************** PROTECTED FUNCTIONS ******************************/
   /*
-  * Check GET query funnction
+  * Перевірка та запис GET-запитів
   */
   protected function check_get_query() {
-    $get = explode("?", $this->url); //Fined GET querys
-    if (!empty($get[1])) { //If fined GET querys
-      $get = explode("&", $get[1]); //Return array of GET querys
-      foreach ($get as $value) { //Format GET array
+    $get = explode("?", $this->url); //Пошук запитів
+    if (!empty($get[1])) { //Якщо запит був
+      $get = explode("&", $get[1]); //Отримуєм запити
+      foreach ($get as $value) { //Формотуєм запити у массив
         $data = explode("=",$value);
-        $result[$data[0]] = $data[1]; //Set result array like $result[GET_name] = GET value
+        $result[$data[0]] = $data[1]; //Вигляд массиву запитів: $result[GET_name] = GET value
       }
-      return $result; //Return GET array
+      return $result; //Повертаєм результат
     }
-    return NULL; //Return NULL
+    return NULL; //Повертаєм NULL
   }
 
   /*
-  * Check language funnction
+  * Визначення мови користувача
   */
   protected function check_user_language() {
-    //Language Set
+    //Встановлення мови
     if (isset($this->get_querys['lang'])) {
       if (is_dir('app/leng/'.$this->get_querys['lang'])) {
         $lang = $this->get_querys['lang']; //Set language
@@ -74,7 +74,7 @@ class MainRouter {
       }
     }
 
-    //Language Check
+    //Візначення мови
     if (!isset($_COOKIE['lang'])) {
       if (isset($_SERVER["HTTP_ACCEPT_LANGUAGE"])) {
         preg_match_all('/([a-z]{1,8}(?:-[a-z]{1,8})?)(?:;q=([0-9.]+))?/', strtolower($_SERVER["HTTP_ACCEPT_LANGUAGE"]), $matches);
@@ -86,7 +86,7 @@ class MainRouter {
         $lang = key($langs);
         $lang = substr($lang, 0, 2);
         if (!is_dir('app/lang/'.$lang)) {
-          $lang = 'en'; //Default language
+          $lang = 'en'; //Мова по-замовчуванню
           setcookie("lang", $lang, time() + (365 * 24 * 60 * 60), "/");
         }
         else {
@@ -94,7 +94,7 @@ class MainRouter {
         }
       }
       else {
-        $lang = 'en'; //Default language
+        $lang = 'en'; //Мова по-замовчуванню
         setcookie("lang", $lang, time() + (365 * 24 * 60 * 60), "/");
       }
     }
@@ -115,24 +115,24 @@ class MainRouter {
   }
 
   /*
-  * Check routes function
+  * Перевірка шляхів
   */
   protected function check_routes() {
     $data = explode("?", $this->url);
-    $data = explode("/", $data[0]); //Take names
-    $lang = $data[0]; //Take page folder
+    $data = explode("/", $data[0]); //Візначаємо імена
+    $lang = $data[0]; //Мова запиту
     if (isset($data[1])) {
-      $folder = $data[1]; //Take page folder
+      $folder = $data[1]; //Папки запиту
     }
     else {
-      $folder = 'index';
+      $folder = 'index'; //Папка по-замовчуванню
     }
 
-    $controller = $data[array_key_last($data)]; //Take controller name
+    $controller = $data[array_key_last($data)]; //Візначаємо ім'я контроллера
     if ($controller === $lang) {
-      $controller = 'index';
+      $controller = 'index'; //Ім'я контроллера по-замовчуванню
     }
-    $route = ''; //Set EMPTY route variable
+    $route = ''; //Якщо шлях пустий
     foreach ($data as $value) {
       if ($value !== $data[0] AND $value !== $data[array_key_last($data)]) {
         $route .= '/'.$value;

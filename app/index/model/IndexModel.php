@@ -1,12 +1,13 @@
 <?php
+//Пространство імен
 namespace app\index\model;
 
-//use msp Model
+//Підключення MainModel
 use Core\Main\MainModel;
 
 /*******************************************************************************
 *                                                                              *
-*                               index model                                    *
+*                               Модель сторінки Index                          *
 *                                                                              *
 *******************************************************************************/
 class IndexModel extends MainModel {

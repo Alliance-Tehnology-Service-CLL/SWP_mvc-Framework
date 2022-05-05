@@ -1,9 +1,9 @@
 <?php
-/* Include framework Globals */
+/* Підключення глобальних частин */
 require 'Core/globalIncludes.php';
 
-/* Include namespaces */
-use Core\Main\MainRouter; //Use MainRouter class
+/* Підключення роутінгу */
+use Core\Main\MainRouter;
 
-/* Start routing */
-$router = new MainRouter($_SERVER['REQUEST_URI']); //Create router object
+/* Створення об'єкта роутінгу */
+$router = new MainRouter($_SERVER['REQUEST_URI']);

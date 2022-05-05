@@ -1,5 +1,4 @@
 <?php
-//this namespace
 namespace Core\Main;
 
 use Core\Main\MainView;
@@ -9,11 +8,11 @@ use Core\Main\MainView;
 *                                                                              *
 *******************************************************************************/
 abstract class MainController {
-  public $model;
-  public $view;
-  protected $routs; //Routs array
+  public $model; //Об'єкт моделі
+  public $view; //Об'єкт виду
+  protected $routs; //Шляхи до файлів сторінки
   protected $SWP; //SWP array
-  protected $get_querys; //GET querys array
+  protected $get_querys; //GET-запроси
 
   //Start function
   function __construct($routs,$lang,$get_querys) {

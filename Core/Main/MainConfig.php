@@ -1,14 +1,16 @@
 <?php
 $config = [
-  'db_conn' => [ //SQL data base connection parameters
+  //Підключення до бази данних
+  'db_conn' => [
     'host' => '',
     'db_name' => '',
     'user' => '',
     'password' => '',
   ],
 
-  'debug' => [ //Developer tools
-    'errors' => true,
-    'tools' => true,
+  //Інструменти розробника
+  'debug' => [
+    'errors' => true, //Виводити усі помилки
+    'tools' => true, //Використовувати функції за файлу Core/lib/dev.php
   ],
 ];

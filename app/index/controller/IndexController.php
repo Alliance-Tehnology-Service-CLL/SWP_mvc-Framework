@@ -1,18 +1,18 @@
 <?php
-//this namespace
+//Пространство імен
 namespace app\index\controller;
 
-//use SWP MainController
+//Підключення SWP MainController
 use Core\Main\MainController;
 
 /*******************************************************************************
 *                                                                              *
-*                               index page class                               *
+*                               Контроллер Index                               *
 *                                                                              *
 *******************************************************************************/
 class IndexController extends MainController {
   /*
-  * index page Action
+  * Головна функцыя сторынки Index
   */
   public function IndexAction() {
     $this->view->render('index_page');

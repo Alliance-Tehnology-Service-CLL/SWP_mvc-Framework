@@ -1,5 +1,5 @@
 <?php
-//this namespace
+//Пространство імен
 namespace Core\Main;
 
 /*******************************************************************************
@@ -8,21 +8,20 @@ namespace Core\Main;
 *                                                                              *
 *******************************************************************************/
 class MainView {
-  /* Object variables */
-  public $layout = 'default'; //view layout
-  protected $route; //For route from SWP mainontroller
-  protected $SWP; //SWP variable
+  /* Свойства об'єкту */
+  protected $route; //Шляхи до контроллера, моделі та виду
+  protected $SWP; //SWP глобальні данні
 
   /*
-  * Object create function
+  * Object create
   */
   public function __construct($route, $SWP) {
-    $this->route = $route; //Route from SWP mainontroller
+    $this->route = $route;
     $this->SWP = $SWP;
   }
 
   /*
-  * Render function
+  * Метод рендеру сторінки
   */
   public function render($title,$vars = []) {
     $vars['SWP'] = $this->SWP;
@@ -47,7 +46,7 @@ class MainView {
   }
 
   /*
-  * Redirect function
+  * Метод редіректу
   */
   public static function redirect($url) {
     header("Location: ".$url);
@@ -55,7 +54,7 @@ class MainView {
   }
 
   /*
-  * Page errors function
+  * Метод сторінок помилок
   */
   public static function errorCode($code,$lang) {
     http_response_code($code);
