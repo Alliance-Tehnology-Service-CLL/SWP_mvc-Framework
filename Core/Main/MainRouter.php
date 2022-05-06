@@ -151,7 +151,7 @@ class MainRouter {
       $routes['layout'] = 'app/lang/'.$lang.'/layout/'.$controller;
     }
     elseif (file_exists('app/lang/'.$lang.'/layout'.$route.'/'.$controller.'.php')) {
-      $routes['layout'] = 'app/lang/'.$lang.'/layout'.$route.'/'.$controller.'.php';
+      $routes['layout'] = 'app/lang/'.$lang.'/layout'.$route.'/'.$controller;
     }
     elseif (file_exists('app/lang/'.$lang.'/layout/default.php')) {
       $routes['layout'] = 'app/lang/'.$lang.'/layout/default';
