@@ -29,9 +29,9 @@ class Db {
   public function SWP_SQL($sql,$type = 'query',$params = []) {
     if ($this->db) {
       if ($type = 'row') {
-        return $this->row($sql,$params = []);
+        return $this->row($sql,$params);
       }
-      return $this->query($sql,$params = []);
+      return $this->query($sql,$params);
     }
     else {
       return 'Connection Error';
