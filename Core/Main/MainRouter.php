@@ -68,6 +68,10 @@ class MainRouter {
     //Встановлення мови
     if (isset($this->get_querys['lang'])) {
       if (is_dir('app/leng/'.$this->get_querys['lang'])) {
+        $route = explode("?",$this->url);
+        $route = explode("/",$route[0]);
+        unset($route[0]);
+        $route = implode("/",$route);
         $lang = $this->get_querys['lang']; //Set language
         setcookie("lang", $lang, time() + (365 * 24 * 60 * 60), "/");
         MainView::redirect("/".$lang."/");
