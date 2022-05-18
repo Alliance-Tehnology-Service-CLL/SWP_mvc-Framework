@@ -67,7 +67,7 @@ class MainRouter {
   protected function check_user_language() {
     //Встановлення мови
     if (isset($this->get_querys['lang'])) {
-      if (is_dir('app/leng/'.$this->get_querys['lang'])) {
+      if (is_dir('app/lang/'.$this->get_querys['lang'])) {
         $route = explode("?",$this->url);
         $route = explode("/",$route[0]);
         unset($route[0]);

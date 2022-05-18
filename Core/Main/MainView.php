@@ -58,8 +58,8 @@ class MainView {
   */
   public static function errorCode($code,$lang) {
     http_response_code($code);
-    if (file_exists('app/'.$lang.'/errors/'.$code.'.php')) {
-      require 'app/'.$lang.'/errors/'.$code.'.php';
+    if (file_exists('app/lang/'.$lang.'/errors/'.$code.'.php')) {
+      require 'app/lang/'.$lang.'/errors/'.$code.'.php';
     }
     else {
       echo $code;
